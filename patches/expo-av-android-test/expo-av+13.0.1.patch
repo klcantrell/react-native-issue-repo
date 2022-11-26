@@ -1,0 +1,19 @@
+diff --git a/node_modules/expo-av/android/build.gradle b/node_modules/expo-av/android/build.gradle
+index 49edd82..b2bf72e 100644
+--- a/node_modules/expo-av/android/build.gradle
++++ b/node_modules/expo-av/android/build.gradle
+@@ -129,6 +129,14 @@ android {
+         "**/libfolly_json.so",
+         "**/libhermes.so",
+         "**/libjsi.so",
++        // fixes an issue with how gradle merges META-INF files during test builds START
++        // https://stackoverflow.com/questions/52518378/more-than-one-file-was-found-with-os-independent-path-meta-inf-proguard-android
++        // https://stackoverflow.com/questions/44342455/more-than-one-file-was-found-with-os-independent-path-meta-inf-license
++        // https://stackoverflow.com/questions/69761945/2-files-found-with-path-meta-inf-lgpl2-11
++        // https://github.com/wix/Detox/issues/1208
++        "META-INF/*",
++        "META-INF/**/*"
++        // fixes an issue with how gradle merges META-INF files during test builds END
+     ]
+   }
+   configurations {
